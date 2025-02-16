@@ -1,16 +1,11 @@
-# all_you_can_manage
+# all_you_can_manage_front
 
-A new Flutter project.
+to run the project, you need to have installed the <a href="https://docs.flutter.dev/get-started/install">flutter sdk</a> and the <a href="https://developer.android.com/studio?hl=it">android studio</a> or xcode, depending on the platform you want to run the project (if you just want to test flutter sdk is enough).
 
-## Getting Started
+After installing the flutter sdk, you can run the project by running the following command in the terminal:
 
-This project is a starting point for a Flutter application.
+```bash
+flutter pub get
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+flutter run # or just press F5 in the vscode
+```
