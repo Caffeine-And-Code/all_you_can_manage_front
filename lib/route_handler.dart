@@ -1,4 +1,4 @@
-import 'package:all_you_can_manage/Models/Role.dart';
+import 'package:all_you_can_manage/Models/User.dart';
 import 'package:all_you_can_manage/Screens/login.dart';
 import 'package:all_you_can_manage/Screens/roles_selector.dart';
 import 'package:all_you_can_manage/Screens/single_table.dart';
@@ -44,8 +44,8 @@ class RouteHandler {
         return MaterialPageRoute(builder: (_) => const Login());
 
       case "/Tables":
-        Role role = settings.arguments as Role;
-        return MaterialPageRoute(builder: (_) => Tables(role: role,));
+        User user = settings.arguments as User;
+        return MaterialPageRoute(builder: (_) => Tables(role: user,));
       
       case "/SingleTable":
         var args = settings.arguments;

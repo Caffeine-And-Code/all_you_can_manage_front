@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum CardContainerMode{
-    square200,
+    square250,
     rectangle_w320,
     rectangle_w400
   } 
@@ -12,10 +12,10 @@ class CardContainer extends StatelessWidget {
   late final SliverGridDelegateWithMaxCrossAxisExtent gridDelegate;
   CardContainer({super.key,required this.children,required this.mode}){
     gridDelegate = SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: mode == CardContainerMode.square200 ? 200 : (mode == CardContainerMode.rectangle_w320 ? 320 : 425),
+      maxCrossAxisExtent: mode == CardContainerMode.square250 ? 250 : (mode == CardContainerMode.rectangle_w320 ? 320 : 425),
       crossAxisSpacing: 30,
       mainAxisSpacing: 30,
-      childAspectRatio: mode == CardContainerMode.square200 ? 1 : (mode == CardContainerMode.rectangle_w320 ? 1.5 : 1.6),
+      childAspectRatio: mode == CardContainerMode.square250 ? 1 : (mode == CardContainerMode.rectangle_w320 ? 1.5 : 1.6),
     );
   }
 

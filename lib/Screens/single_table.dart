@@ -1,5 +1,5 @@
 import 'package:all_you_can_manage/Components/helmet.dart';
-import 'package:all_you_can_manage/Models/Role.dart';
+import 'package:all_you_can_manage/Models/User.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 import 'package:all_you_can_manage/Utilities/storage_manager.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class SingleTable extends StatefulWidget {
 
 class _SingleTableState extends State<SingleTable> {
 
-    late Role role; // Dichiarata senza inizializzazione immediata
+    late User role; // Dichiarata senza inizializzazione immediata
   bool isLoading = true; // Stato per gestire il caricamento
 
   @override
@@ -28,9 +28,9 @@ class _SingleTableState extends State<SingleTable> {
     String? value = await StorageManager.getKey("role");
     setState(() {
       if (value != null) {
-        role = Role.fromJsonString(value);
+        role = User.fromJsonString(value);
       } else {
-        role = Role(id: -1, name: "Unknown", icon: const Icon(Icons.error));
+        role = User.empty();
       }
       isLoading = false; // Il caricamento è completato
     });
@@ -53,7 +53,7 @@ class _SingleTableState extends State<SingleTable> {
                   children: [
                     Text("Table ${widget.table.id}"),
                     Text("Status: ${widget.table.status}"),
-                    Text("Sector: ${widget.table.sector.name}"),
+                    Text("Sector: ${widget.table.room.name}"),
                     Text("Total: ${widget.table.calculateTotal()}"),
                     Text(
                         "Persons at table: ${widget.table.calculatePersonsAtTable()}"),

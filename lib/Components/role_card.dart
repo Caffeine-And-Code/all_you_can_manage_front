@@ -2,31 +2,31 @@ import 'dart:convert';
 
 import 'package:all_you_can_manage/Utilities/storage_manager.dart';
 import 'package:all_you_can_manage/styles/elevated_btn_style.dart';
-import 'package:all_you_can_manage/Models/Role.dart';
+import 'package:all_you_can_manage/Models/User.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 import 'package:flutter/material.dart';
 
 class RoleCard extends StatelessWidget {
-  const RoleCard({super.key, required this.role});
+  const RoleCard({super.key, required this.user});
 
-  final Role role;
+  final User user;
 
   saveRole(BuildContext context) {
-    StorageManager.saveKey("role", jsonEncode(role.toJson())).whenComplete(
-        () => Navigator.pushNamed(context, "/Tables", arguments: role));
+    StorageManager.saveKey("role", jsonEncode(user.toJson())).whenComplete(
+        () => Navigator.pushNamed(context, "/Tables", arguments: user));
   }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedBtnStyle.getStyle(const Size(100, 100)),
+      style: ElevatedBtnStyle.getStyle(const Size(200, 200)),
       onPressed: () => saveRole(context),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          role.icon,
+          user.role.getIcon(),
           Text(
-            role.name,
+            user.name,
             style: TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.bold,

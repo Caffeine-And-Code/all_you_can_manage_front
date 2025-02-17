@@ -1,4 +1,4 @@
-import 'package:all_you_can_manage/Models/Role.dart';
+import 'package:all_you_can_manage/Models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 
@@ -17,7 +17,7 @@ class Helmet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(
-                props.role.icon.icon,
+                props.role.role.getIcon().icon,
                 size: 35,
               ),
               Container(
@@ -96,7 +96,7 @@ class Helmet extends StatelessWidget {
 }
 
 class HelmetProps {
-  late Role role;
+  late User role;
   late HelmetType type;
   late Widget? child;
 

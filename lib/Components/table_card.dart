@@ -27,7 +27,7 @@ class TableCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Tavolo ${table.id + 1}",
+                    Text("Tavolo ${table.number}",
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,

@@ -1,29 +1,31 @@
+import 'package:all_you_can_manage/Models/Room.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 import 'package:flutter/material.dart';
 
 class FilterInline extends StatefulWidget {
-  final List<String> filters;
-  final Function(String) onFilter;
+  final List<Room> filters;
+  final Function(Room) onFilter;
   FilterInline({super.key, required this.filters, required this.onFilter}) {
-    filters.insert(0, "Tutti");
+    filters.insert(0, Room(id: -1, name: "Tutti"));
   }
-  late String currentFilter;
   @override
   State<FilterInline> createState() => _FilterInlineState();
 }
 
 class _FilterInlineState extends State<FilterInline> {
+  
+  late Room currentFilter;
   //init state for the filter
   @override
   void initState() {
     super.initState();
-    widget.currentFilter = "Tutti";
+    currentFilter = widget.filters[0];
   }
 
-  void onPressed(String filter) {
+  void onPressed(Room filter) {
     widget.onFilter(filter);
     super.setState(() {
-      widget.currentFilter = filter;
+      currentFilter = filter;
     });
   }
 
@@ -45,7 +47,7 @@ class _FilterInlineState extends State<FilterInline> {
                   maximumSize:
                       MaterialStateProperty.all<Size>(const Size(160, 45)),
                   backgroundColor: MaterialStateProperty.all<Color>(filter ==
-                          widget.currentFilter
+                          currentFilter
                       ? ColorsGetter.getColor(ColorsNames.primary)
                       : (ColorsGetter.getColor(ColorsNames.navAndFooterBg))),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -53,10 +55,10 @@ class _FilterInlineState extends State<FilterInline> {
                           borderRadius: BorderRadius.circular(14.0))),
                 ),
                 child: Text(
-                  filter,
+                  filter.name,
                   style: TextStyle(
                       fontSize: 22,
-                      color: filter == widget.currentFilter
+                      color: filter == currentFilter
                           ? ColorsGetter.getColor(ColorsNames.navAndFooterBg)
                           : (ColorsGetter.getColor(
                               ColorsNames.navAndFooterText))),
