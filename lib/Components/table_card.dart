@@ -1,7 +1,7 @@
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 import 'package:all_you_can_manage/styles/elevated_btn_style.dart';
 import 'package:flutter/material.dart';
-import 'package:all_you_can_manage/Models/table.dart' as Model;
+import 'package:all_you_can_manage/Models/Table.dart' as Model;
 
 class TableCard extends StatelessWidget {
   final Model.Table table;
@@ -11,7 +11,7 @@ class TableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedBtnStyle.getStyle(const Size(400, 325)),
-      onPressed: () => print("Table ${table.id}"),
+      onPressed: () => Navigator.pushNamed(context, "/SingleTable", arguments: table),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -27,7 +27,7 @@ class TableCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Table ${table.id + 1}",
+                    Text("Tavolo ${table.id + 1}",
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,

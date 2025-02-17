@@ -7,7 +7,7 @@ import 'package:all_you_can_manage/Models/RestaurantSector.dart';
 import 'package:all_you_can_manage/Models/Role.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:all_you_can_manage/Models/table.dart' as Model;
+import 'package:all_you_can_manage/Models/Table.dart' as Model;
 
 class Tables extends StatefulWidget {
   Tables({super.key, required this.role});

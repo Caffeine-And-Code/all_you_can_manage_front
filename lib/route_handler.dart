@@ -1,19 +1,21 @@
 import 'package:all_you_can_manage/Models/Role.dart';
 import 'package:all_you_can_manage/Screens/login.dart';
 import 'package:all_you_can_manage/Screens/roles_selector.dart';
+import 'package:all_you_can_manage/Screens/single_table.dart';
 import 'package:all_you_can_manage/Screens/tables.dart';
 import 'package:all_you_can_manage/Utilities/storage_manager.dart';
+import 'package:all_you_can_manage/Models/Table.dart' as Model;
 import 'package:flutter/material.dart';
 
 class RouteHandler {
-  static Route<dynamic> _errorRoute() {
+  static Route<dynamic> _errorRoute(String message) {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Error'),
         ),
-        body: const Center(
-          child: Text('ERROR'),
+        body: Center(
+          child: Text('Error: $message'),
         ),
       );
     });
@@ -44,9 +46,18 @@ class RouteHandler {
       case "/Tables":
         Role role = settings.arguments as Role;
         return MaterialPageRoute(builder: (_) => Tables(role: role,));
+      
+      case "/SingleTable":
+        var args = settings.arguments;
+        if (args != null && args is Model.Table) {
+          Model.Table table = args;
+          return MaterialPageRoute(builder: (_) => SingleTable(table: table));
+        } else {
+          return _errorRoute('The arguments are not correct! passed $args');
+        }
 
       default:
-        return _errorRoute();
+        return _errorRoute('Wrong Route!');
     }
   }
 }
