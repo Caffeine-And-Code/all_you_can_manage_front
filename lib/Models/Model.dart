@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-abstract class Model{
+abstract class Model implements Comparable<Model> {
   int id = -1;
   Model({required this.id});
   Model.empty(){
@@ -14,7 +14,18 @@ abstract class Model{
     id = json['id'];
   }
 
-  equals(Model sector) {
-    return id == sector.id;
+  equals(Model other) {
+    return id == other.id && runtimeType == other.runtimeType;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Model && other.runtimeType == runtimeType && other.id == id;
+  }
+
+  @override
+  int compareTo(Model other) {
+    return id.compareTo(other.id);
   }
 }

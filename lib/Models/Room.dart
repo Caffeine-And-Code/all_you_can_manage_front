@@ -19,4 +19,11 @@ class Room extends Model {
     Map<String, dynamic> json = jsonDecode(jsonString);
     name = json['name'];
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
 }

@@ -11,14 +11,16 @@ class TableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedBtnStyle.getStyle(const Size(400, 325)),
-      onPressed: () => Navigator.pushNamed(context, "/SingleTable", arguments: table),
+      onPressed: () =>
+          Navigator.pushNamed(context, "/SingleTable", arguments: table),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
               alignment: Alignment.center, // Per centrare il testo
-              child: Icon(Icons.table_restaurant, size: 100, color: table.getTableColor()),
+              child: Icon(Icons.table_restaurant,
+                  size: 100, color: table.getTableColor()),
             ),
           ),
           Expanded(
@@ -33,13 +35,23 @@ class TableCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: ColorsGetter.getColor(
                                 ColorsNames.navAndFooterText))),
+                    table.getCurrentOrder() != null
+                        ? Text(
+                            table.getCurrentOrder()!.user.name,
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: ColorsGetter.getColor(
+                                  ColorsNames.navAndFooterText),
+                            ),
+                          )
+                        : const SizedBox(),
                     table.calculatePersonsAtTable() > 0
                         ? Column(
                             children: [
                               Text(
                                 "Coperti: ${table.calculatePersonsAtTable()}",
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 22,
                                   color: ColorsGetter.getColor(
                                       ColorsNames.navAndFooterText),
                                 ),
@@ -47,7 +59,7 @@ class TableCard extends StatelessWidget {
                               Text(
                                 "€${table.calculateTotal()}",
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 22,
                                   color: ColorsGetter.getColor(
                                       ColorsNames.navAndFooterText),
                                 ),

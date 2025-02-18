@@ -1,4 +1,6 @@
 import 'package:all_you_can_manage/Components/helmet.dart';
+import 'package:all_you_can_manage/Components/search_product_panel.dart';
+import 'package:all_you_can_manage/Components/table_manage_panel.dart';
 import 'package:all_you_can_manage/Models/User.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 import 'package:all_you_can_manage/Utilities/storage_manager.dart';
@@ -15,22 +17,18 @@ class SingleTable extends StatefulWidget {
 
 class _SingleTableState extends State<SingleTable> {
 
-    late User role; // Dichiarata senza inizializzazione immediata
-  bool isLoading = true; // Stato per gestire il caricamento
-
-  @override
-  void initState() {
-    super.initState();
-    _loadRole();
-  }
+  late User role; 
+  bool isLoading = true; 
 
   Future<void> _loadRole() async {
-    String? value = await StorageManager.getKey("role");
+    String? roleString = await StorageManager.getKey("role");
+    
     setState(() {
-      if (value != null) {
-        role = User.fromJsonString(value);
+      if (roleString != null) {
+        role = User.fromJsonString(roleString);
       } else {
-        role = User.empty();
+        // Se non è stato trovato alcun ruolo, l'utente viene reindirizzato alla pagina di scelta del ruolo
+        Navigator.pushNamed(context, "/");
       }
       isLoading = false; // Il caricamento è completato
     });
@@ -41,6 +39,7 @@ class _SingleTableState extends State<SingleTable> {
   Widget build(BuildContext context) {
     //wait for the data to be loaded from the storage
     if (isLoading) {
+      _loadRole();
       return Center(child: CircularProgressIndicator(color: ColorsGetter.getColor(ColorsNames.primary),)); 
     }
 
@@ -48,21 +47,11 @@ class _SingleTableState extends State<SingleTable> {
         props: HelmetProps(
             role: role,
             type: HelmetType.tables,
-            child:  Center(
-                child: Column(
+            child:  const Center(
+                child: Row(
                   children: [
-                    Text("Table ${widget.table.id}"),
-                    Text("Status: ${widget.table.status}"),
-                    Text("Sector: ${widget.table.room.name}"),
-                    Text("Total: ${widget.table.calculateTotal()}"),
-                    Text(
-                        "Persons at table: ${widget.table.calculatePersonsAtTable()}"),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Go back!'),
-                    ),
+                    SearchProductPanel(),
+                    TableManagePanel(),
                   ],
                 ),
               ),

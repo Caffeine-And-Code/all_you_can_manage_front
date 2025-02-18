@@ -6,14 +6,15 @@ class FilterInline extends StatefulWidget {
   final List<Room> filters;
   final Function(Room) onFilter;
   FilterInline({super.key, required this.filters, required this.onFilter}) {
-    filters.insert(0, Room(id: -1, name: "Tutti"));
+    if(!filters.contains(Room(id: -1, name: "Tutti"))){
+      filters.insert(0, Room(id: -1, name: "Tutti"));
+    }
   }
   @override
   State<FilterInline> createState() => _FilterInlineState();
 }
 
 class _FilterInlineState extends State<FilterInline> {
-  
   late Room currentFilter;
   //init state for the filter
   @override
@@ -46,8 +47,8 @@ class _FilterInlineState extends State<FilterInline> {
                       MaterialStateProperty.all<Size>(const Size(120, 45)),
                   maximumSize:
                       MaterialStateProperty.all<Size>(const Size(160, 45)),
-                  backgroundColor: MaterialStateProperty.all<Color>(filter ==
-                          currentFilter
+                  backgroundColor: MaterialStateProperty.all<Color>(filter
+                          .equals(currentFilter)
                       ? ColorsGetter.getColor(ColorsNames.primary)
                       : (ColorsGetter.getColor(ColorsNames.navAndFooterBg))),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -58,7 +59,7 @@ class _FilterInlineState extends State<FilterInline> {
                   filter.name,
                   style: TextStyle(
                       fontSize: 22,
-                      color: filter == currentFilter
+                      color: filter.equals(currentFilter)
                           ? ColorsGetter.getColor(ColorsNames.navAndFooterBg)
                           : (ColorsGetter.getColor(
                               ColorsNames.navAndFooterText))),

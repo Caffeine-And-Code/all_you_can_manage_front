@@ -4,7 +4,9 @@ enum ColorsNames{
   bgDefault,
   navAndFooterBg,
   navAndFooterText,
-  primary
+  primary,
+  secondaryText,
+  secondaryBg,
 }
 
 abstract class ColorsGetter {
@@ -14,7 +16,9 @@ abstract class ColorsGetter {
       ColorsNames.bgDefault: "FFF1E3",
       ColorsNames.navAndFooterBg: "FFFFFF",
       ColorsNames.navAndFooterText: "000000",
-      ColorsNames.primary: "FF941D"
+      ColorsNames.primary: "FF941D",
+      ColorsNames.secondaryText: "989898",
+      ColorsNames.secondaryBg: "F5F5F5",
     };
   }
 

@@ -1,15 +1,43 @@
 import 'package:all_you_can_manage/Components/card_container.dart';
+import 'package:all_you_can_manage/Components/loading_grid.dart';
 import 'package:all_you_can_manage/Components/role_card.dart';
-import 'package:all_you_can_manage/Models/Factory/UserFactory.dart';
+import 'package:all_you_can_manage/Models/Factory/Factory.dart';
 import 'package:all_you_can_manage/Models/User.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
+import 'package:all_you_can_manage/config/system_variables.dart';
 import 'package:flutter/material.dart';
 
-class RoleSelector extends StatelessWidget {
-  RoleSelector({super.key});
+class RoleSelector extends StatefulWidget {
+  const RoleSelector({super.key});
 
-  // TODO => delete this fake data and get the real data from the server
-  final List<User> roles = [for (int i = 0; i < 15; i++) UserFactory().createUser()];
+  @override
+  State<RoleSelector> createState() => _RoleSelectorState();
+}
+
+class _RoleSelectorState extends State<RoleSelector> {
+  late List<User> users;
+  late bool isLoading;
+
+  @override
+  void initState() {
+    super.initState();
+    isLoading = true;
+    users = List.empty();
+    loadUsers();
+  }
+
+  loadUsers() async {
+    // simulate a delay
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      if (SystemVariables.isDebug()) {
+        users = Factory.getPresetOfUsers();
+      } else {
+        // TODO => add the getter for the real data from the server
+      }
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +68,19 @@ class RoleSelector extends StatelessWidget {
             )
           ],
         ),
-        body: CardContainer(
-          mode: CardContainerMode.square250,
-          children: roles
-              .map((role) => RoleCard(
-                    user: role,
-                  ))
-              .toList(),
-        ));
+        body: isLoading
+            ? LoadingGrid(
+                loading: isLoading,
+                length: 10,
+                mode: CardContainerMode.square250,
+                singleLoadingElement: RoleCard(user: User.empty()))
+            : CardContainer(
+                mode: CardContainerMode.square250,
+                children: users
+                    .map((role) => RoleCard(
+                          user: role,
+                        ))
+                    .toList(),
+              ));
   }
 }

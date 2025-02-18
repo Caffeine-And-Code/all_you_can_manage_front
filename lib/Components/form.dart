@@ -69,7 +69,7 @@ class _FormState extends State<CustomForm> {
         child: Column(children: [
           ...widget.props.labels.map((label) {
             return widgetResolver(label);
-          }).toList(),
+          }),
           FloatingActionButton(
             onPressed: () => widget.props.onSubmit(),
             child: const Text('Submit'),

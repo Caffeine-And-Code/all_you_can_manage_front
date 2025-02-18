@@ -3,7 +3,6 @@ import 'package:all_you_can_manage/Screens/login.dart';
 import 'package:all_you_can_manage/Screens/roles_selector.dart';
 import 'package:all_you_can_manage/Screens/single_table.dart';
 import 'package:all_you_can_manage/Screens/tables.dart';
-import 'package:all_you_can_manage/Utilities/storage_manager.dart';
 import 'package:all_you_can_manage/Models/Table.dart' as Model;
 import 'package:flutter/material.dart';
 

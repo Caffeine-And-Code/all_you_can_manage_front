@@ -1,4 +1,5 @@
 import 'package:all_you_can_manage/Models/User.dart';
+import 'package:all_you_can_manage/styles/shadow_box.dart';
 import 'package:flutter/material.dart';
 import 'package:all_you_can_manage/Utilities/colors_manager.dart';
 
@@ -46,15 +47,7 @@ class Helmet extends StatelessWidget {
         ),
         body: Center(child: props.child),
         bottomNavigationBar:  Container(
-    decoration: BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.35), // Colore dell'ombra
-          blurRadius: 16, // Sfocatura
-          offset:const Offset(0, -4), // Ombra verso l'alto
-        ),
-      ],
-    ),
+    decoration: ShadowBox.getStyle(),
     child: BottomNavigationBar(
             elevation: 4,
             iconSize: 60,
